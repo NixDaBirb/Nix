@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Banner Section -->
+    <header class="banner-container">
+        <!-- Replace 'banner.jpg' with your actual image name -->
+        <img src="https://via.placeholder.com/1920x400/1e1e24/9b5de5?text=Your+Banner+Image+Here" alt="Site Banner" class="banner-img">
+        
+        <div class="header-content">
+            <div class="logo">
+                <!-- You can put text or an avatar here -->
+                <h1>MY PORTFOLIO</h1>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation / Categories -->
+    <nav class="category-filters" id="filters">
+        <button class="filter-btn active" data-filter="all">All Work</button>
+        <button class="filter-btn" data-filter="ui">UI/UX Design</button>
+        <button class="filter-btn" data-filter="dev">Development</button>
+        <button class="filter-btn" data-filter="game">Game Assets</button>
+    </nav>
+
+    <!-- The Masonry Grid -->
+    <main>
+        <div class="masonry-grid" id="portfolio-grid">
+            <!-- JavaScript will automatically inject your images here -->
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
