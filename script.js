@@ -1,78 +1,128 @@
-// --- YOUR PORTFOLIO DATA ---
-// To add a new image, simply copy one of the blocks below, paste it at the top, 
-// and change the title, category, and image URL.
-const portfolioData = [
-    {
-        title: "Neon City Concept",
-        category: "ui",
-        // Using placeholder images with random heights to show the "Tetris" effect
-        image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" 
-    },
-    {
-        title: "Dark Mode Dashboard",
-        category: "dev",
-        image: "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?auto=format&fit=crop&w=600&h=800&q=80" 
-    },
-    {
-        title: "RPG Asset Pack",
-        category: "game",
-        image: "https://images.unsplash.com/photo-1558244661-d248897f7bc4?auto=format&fit=crop&w=600&h=400&q=80"
-    },
-    {
-        title: "Mobile App Wireframe",
-        category: "ui",
-        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&h=900&q=80"
-    },
-    {
-        title: "Server Script Manager",
-        category: "dev",
-        image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&h=500&q=80"
-    },
-    {
-        title: "Character Sprites",
-        category: "game",
-        image: "https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?auto=format&fit=crop&w=600&h=700&q=80"
-    }
-];
+// Data store for all your images
+const portfolioData = {
+    graphicdesign: [],
+    digitalart: [],
+    traditionalart: []
+};
 
-// --- LOGIC ---
+const foldersToScan = ['graphicdesign', 'digitalart', 'traditionalart'];
+let foldersFinished = 0;
+
 const grid = document.getElementById('portfolio-grid');
-const filterBtns = document.querySelectorAll('.filter-btn');
+const aboutSection = document.getElementById('about-section');
+const contactSection = document.getElementById('contact-section');
+const navButtons = document.querySelectorAll('.nav-btn');
 
-// Function to generate the HTML for the images
-function renderPortfolio(filterCategory) {
-    // Clear the grid first
-    grid.innerHTML = '';
+// --- 1. THE FOLDER SCANNER ---
+// This invisible function runs immediately to count and store your images
+function scanFolder(folderName) {
+    let imageNumber = 1;
 
-    // Filter the data based on the button clicked
-    const filteredData = filterCategory === 'all' 
-        ? portfolioData 
-        : portfolioData.filter(item => item.category === filterCategory);
+    function tryLoadNextImage() {
+        const imagePath = `images/${folderName}/${imageNumber}.jpg`;
+        const imgTest = new Image();
 
-    // Build the HTML for each item and inject it
-    filteredData.forEach(item => {
+        imgTest.onload = function() {
+            // Image exists! Save it to our data store and try the next number
+            portfolioData[folderName].push(imagePath);
+            imageNumber++;
+            tryLoadNextImage();
+        };
+
+        imgTest.onerror = function() {
+            // Reached the end of this folder's images
+            foldersFinished++;
+            
+            // If all folders are done scanning, render the default "Work" tab
+            if (foldersFinished === foldersToScan.length) {
+                renderGallery('work');
+            }
+        };
+
+        imgTest.src = imagePath;
+    }
+
+    tryLoadNextImage(); // Start the loop for this folder
+}
+
+// Start scanning all three folders at the same time
+foldersToScan.forEach(folder => scanFolder(folder));
+
+
+// --- 2. RANDOMIZER FUNCTION ---
+// The Fisher-Yates algorithm to randomly shuffle an array
+function shuffleArray(array) {
+    let shuffled = array.slice(); // Copy the array
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+
+// --- 3. THE RENDER FUNCTION ---
+// Clears the screen and draws the requested category
+function renderGallery(targetCategory) {
+    // Hide text sections, show grid
+    aboutSection.classList.add('hidden');
+    contactSection.classList.add('hidden');
+    grid.classList.remove('hidden');
+    grid.innerHTML = ''; 
+
+    let imagesToRender = [];
+
+    if (targetCategory === 'work') {
+        // Grab ALL images from ALL folders, combine them, and shuffle them randomly
+        imagesToRender = [
+            ...portfolioData.graphicdesign,
+            ...portfolioData.digitalart,
+            ...portfolioData.traditionalart
+        ];
+        imagesToRender = shuffleArray(imagesToRender);
+
+    } else if (portfolioData[targetCategory]) {
+        // Just grab the specific folder requested
+        imagesToRender = portfolioData[targetCategory];
+    }
+
+    // Draw the images to the screen
+    imagesToRender.forEach(src => {
         const div = document.createElement('div');
         div.className = 'portfolio-item';
-        div.innerHTML = `
-            <img src="${item.image}" alt="${item.title}" loading="lazy">
-        `;
+        div.innerHTML = `<img src="${src}" alt="Portfolio Art">`;
         grid.appendChild(div);
     });
 }
 
-// Set up the click events for the category buttons
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        // Remove 'active' class from all buttons
-        filterBtns.forEach(b => b.classList.remove('active'));
-        // Add 'active' class to the clicked button
+
+// --- 4. NAVIGATION CLICKS ---
+// Handles what happens when you click the buttons at the top
+navButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault(); // Stop page from jumping
+
+        // Update active purple underline
+        navButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        
-        // Re-render the grid with the new filter
-        const category = btn.getAttribute('data-filter');
-        renderPortfolio(category);
+
+        // Figure out which button was clicked
+        const target = btn.getAttribute('data-target');
+
+        // Logic for About Me / Contact Me
+        if (target === 'about') {
+            grid.classList.add('hidden');
+            contactSection.classList.add('hidden');
+            aboutSection.classList.remove('hidden');
+        } 
+        else if (target === 'contact') {
+            grid.classList.add('hidden');
+            aboutSection.classList.add('hidden');
+            contactSection.classList.remove('hidden');
+        } 
+        // Logic for the Gallery Tabs
+        else {
+            renderGallery(target);
+        }
     });
 });
-
-// Initial render when the page loads
-renderPortfolio('all');
