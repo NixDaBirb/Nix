@@ -1,56 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+<main>
+        <!-- The Gallery (Remains the same) -->
+        <div class="masonry-grid" id="portfolio-grid"></div>
 
-    <!-- Banner Section -->
-    <header class="banner-container">
-        <img src="images/my-banner.jpg" alt="Site Banner" class="banner-img">
-        <div class="header-content">
-            <div class="social-icons" hidden>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
+        <!-- About Me Section -->
+        <div id="about-section" class="content-section hidden">
+            <div class="about-container">
+                <!-- Replace 'profile.jpg' with your actual profile picture name -->
+                <img src="images/profile.jpg" alt="Phoenix" class="profile-img">
+                <div class="about-text">
+                    <h2>About Me</h2>
+                    <p>I'm Phoenix (Nix), a digital and traditional artist. I aim to achieve happiness through my art and inspire others to begin their creative journey as well. Here is where you can view all of my favorite artwork that I've created so far!</p>
+                </div>
             </div>
         </div>
-    </header>
 
-    <!-- Navigation -->
-    <nav class="main-nav" id="navigation">
-        <a href="#" data-target="work" class="nav-btn active">Work</a>
-        <a href="#" data-target="graphicdesign" class="nav-btn">Graphic Design</a>
-        <a href="#" data-target="digitalart" class="nav-btn">Digital Art</a>
-        <a href="#" data-target="traditionalart" class="nav-btn">Traditional Art</a>
-        <a href="#" data-target="about" class="nav-btn">About Me</a>
-        <a href="#" data-target="contact" class="nav-btn">Contact Me</a>
-    </nav>
-
-    <!-- Main Content Area -->
-    <main>
-        <!-- The Gallery -->
-        <div class="masonry-grid" id="portfolio-grid">
-            <!-- JavaScript will auto-load images here -->
-        </div>
-
-        <!-- About Me Section (Hidden by default) -->
-        <div id="about-section" class="content-section hidden">
-            <h2>About Me</h2>
-            <p>Write your about me content here. You can add more HTML like images or paragraphs later.</p>
-        </div>
-
-        <!-- Contact Section (Hidden by default) -->
+        <!-- Contact Section -->
         <div id="contact-section" class="content-section hidden">
             <h2>Contact Me</h2>
-            <p>Email: your.email@example.com</p>
+            <p class="contact-intro">Here is my contact information if you have any commission requests, questions, or comments.</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:pash26156@gmail.com">pash26156@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span>🇺🇸</span>
+                    <a href="tel:+16602817742">(660)-281-7742</a>
+                </div>
+            </div>
         </div>
     </main>
-
-    <script src="script.js"></script>
-</body>
-</html>
