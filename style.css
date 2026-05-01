@@ -28,16 +28,25 @@ body {
 /* --- BANNER --- */
 .banner-container {
     position: relative;
-    width: 100%;
-    height: 450px; /* Changed from 300px to 450px */
+    /* Change this percentage to make the banner wider or narrower */
+    /* 80% or 90% will make it look 'smaller' and centered */
+    width: 100%; 
+    margin: 0 auto; /* Keeps it centered if you use less than 100% width */
+    
+    /* This is the magic line that locks the 1100x450 ratio */
+    aspect-ratio: 1100 / 450; 
+    
+    /* Remove the fixed 450px height so the aspect-ratio can do its job */
+    height: auto; 
+    
     overflow: hidden;
 }
 
 .banner-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* This keeps your art from stretching */
-    opacity: 1; 
+    object-fit: cover;
+    display: block;
 }
 
 /* --- MOBILE ADJUSTMENT --- */
