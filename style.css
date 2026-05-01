@@ -1,30 +1,157 @@
-/* --- ABOUT ME LAYOUT --- */
+:root {
+    --bg-dark: #0d0d12;
+    --bg-card: #1a1a24;
+    --text-light: #f4f4f5;
+    --text-muted: #a1a1aa;
+    --primary-purple: #9b5de5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    background-color: var(--bg-dark);
+}
+
+body {
+    max-width: 1100px; 
+    margin: 0 auto; 
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    min-height: 100vh;
+}
+
+/* --- BANNER --- */
+.banner-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.header-content {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    width: 100%;
+    padding: 0 5%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.social-icons.hidden {
+    display: none;
+}
+
+.social-icons a {
+    color: var(--text-light);
+    font-size: 1.5rem;
+    margin-left: 15px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--primary-purple);
+}
+
+/* --- NAVIGATION --- */
+.main-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 40px 5%;
+}
+
+.main-nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.main-nav a:hover, .main-nav a.active {
+    border-bottom: 2px solid var(--primary-purple);
+    color: var(--primary-purple);
+}
+
+/* --- CONTENT SECTIONS --- */
+main {
+    padding: 0 5% 50px 5%;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- MASONRY GRID --- */
+.masonry-grid {
+    column-count: 4;
+    column-gap: 20px;
+}
+
+.portfolio-item {
+    margin-bottom: 20px;
+    break-inside: avoid;
+}
+
+.portfolio-item img {
+    width: 100%;
+    display: block;
+}
+
+/* --- ABOUT SECTION --- */
 .about-container {
     display: flex;
-    align-items: center; /* Aligns image and text vertically */
+    align-items: center;
     gap: 40px;
-    text-align: left; /* Changes text back to left-aligned for the bio */
     padding: 20px 0;
 }
 
 .profile-img {
-    width: 300px; /* Adjust this to make your photo bigger or smaller */
+    width: 300px;
     height: auto;
-    /* Keeps the sharp edges you requested */
+}
+
+.about-text {
+    text-align: left;
 }
 
 .about-text h2 {
     margin-bottom: 20px;
-    text-align: left;
+    color: var(--primary-purple);
 }
 
 .about-text p {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: var(--text-light);
 }
 
-/* --- CONTACT ME LAYOUT --- */
+/* --- CONTACT SECTION --- */
+#contact-section {
+    text-align: center;
+}
+
+#contact-section h2 {
+    margin-bottom: 15px;
+    color: var(--primary-purple);
+}
+
 .contact-intro {
     margin-bottom: 30px;
     color: var(--text-muted);
@@ -44,31 +171,20 @@
     font-size: 1.2rem;
 }
 
-.contact-item i {
-    color: var(--primary-purple);
-}
-
 .contact-item a {
     color: var(--text-light);
     text-decoration: none;
-    transition: color 0.3s ease;
 }
 
-.contact-item a:hover {
-    color: var(--primary-purple);
-}
-
-/* --- MOBILE ADJUSTMENTS --- */
+/* --- RESPONSIVE --- */
+@media (max-width: 1000px) { .masonry-grid { column-count: 3; } }
 @media (max-width: 800px) {
-    .about-container {
-        flex-direction: column; /* Stacks image on top of text on phones */
-        text-align: center;
-    }
-    .about-text h2 {
-        text-align: center;
-    }
-    .profile-img {
-        width: 100%; /* Makes image full width on small screens */
-        max-width: 400px;
-    }
+    .about-container { flex-direction: column; text-align: center; }
+    .about-text { text-align: center; }
+    .profile-img { width: 100%; max-width: 300px; }
+    .masonry-grid { column-count: 2; }
+}
+@media (max-width: 500px) { 
+    .masonry-grid { column-count: 1; }
+    .banner-container { height: 200px; }
 }

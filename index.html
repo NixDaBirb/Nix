@@ -1,11 +1,49 @@
-<main>
-        <!-- The Gallery (Remains the same) -->
-        <div class="masonry-grid" id="portfolio-grid"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phoenix Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Banner Section -->
+    <header class="banner-container">
+        <!-- Banner is set to PNG based on your previous message -->
+        <img src="images/my-banner.png" alt="Site Banner" class="banner-img">
+        <div class="header-content">
+            <!-- 'hidden' class added so you can reveal them later -->
+            <div class="social-icons hidden">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="navigation">
+        <a href="#" data-target="work" class="nav-btn active">Work</a>
+        <a href="#" data-target="graphicdesign" class="nav-btn">Graphic Design</a>
+        <a href="#" data-target="digitalart" class="nav-btn">Digital Art</a>
+        <a href="#" data-target="traditionalart" class="nav-btn">Traditional Art</a>
+        <a href="#" data-target="about" class="nav-btn">About Me</a>
+        <a href="#" data-target="contact" class="nav-btn">Contact Me</a>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- The Gallery Grid -->
+        <div class="masonry-grid" id="portfolio-grid">
+            <!-- Images load here via JavaScript -->
+        </div>
 
         <!-- About Me Section -->
         <div id="about-section" class="content-section hidden">
             <div class="about-container">
-                <!-- Replace 'profile.jpg' with your actual profile picture name -->
                 <img src="images/profile.jpg" alt="Phoenix" class="profile-img">
                 <div class="about-text">
                     <h2>About Me</h2>
@@ -31,3 +69,7 @@
             </div>
         </div>
     </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
