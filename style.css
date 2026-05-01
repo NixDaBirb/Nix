@@ -30,7 +30,7 @@ body {
     position: relative;
     /* Change this percentage to make the banner wider or narrower */
     /* 80% or 90% will make it look 'smaller' and centered */
-    width: 80%; 
+    width: 50%; 
     margin: 0 auto; /* Keeps it centered if you use less than 100% width */
     
     /* This is the magic line that locks the 1100x450 ratio */
