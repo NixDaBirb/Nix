@@ -12,24 +12,31 @@ const aboutSection = document.getElementById('about-section');
 const contactSection = document.getElementById('contact-section');
 const navButtons = document.querySelectorAll('.nav-btn');
 
+// --- THE FOLDER SCANNER (.PNG VERSION) ---
 function scanFolder(folderName) {
     let imageNumber = 1;
+
     function tryLoadNextImage() {
-        const imagePath = `images/${folderName}/${imageNumber}.jpg`;
+        // Updated to .png
+        const imagePath = `images/${folderName}/${imageNumber}.png`; 
         const imgTest = new Image();
+
         imgTest.onload = function() {
             portfolioData[folderName].push(imagePath);
             imageNumber++;
             tryLoadNextImage();
         };
+
         imgTest.onerror = function() {
             foldersFinished++;
             if (foldersFinished === foldersToScan.length) {
                 renderGallery('work');
             }
         };
+
         imgTest.src = imagePath;
     }
+
     tryLoadNextImage();
 }
 
@@ -51,6 +58,7 @@ function renderGallery(targetCategory) {
     grid.innerHTML = ''; 
 
     let imagesToRender = [];
+
     if (targetCategory === 'work') {
         imagesToRender = [
             ...portfolioData.graphicdesign,
@@ -58,6 +66,7 @@ function renderGallery(targetCategory) {
             ...portfolioData.traditionalart
         ];
         imagesToRender = shuffleArray(imagesToRender);
+
     } else if (portfolioData[targetCategory]) {
         imagesToRender = portfolioData[targetCategory];
     }
@@ -75,16 +84,20 @@ navButtons.forEach(btn => {
         e.preventDefault();
         navButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+
         const target = btn.getAttribute('data-target');
+
         if (target === 'about') {
             grid.classList.add('hidden');
             contactSection.classList.add('hidden');
             aboutSection.classList.remove('hidden');
-        } else if (target === 'contact') {
+        } 
+        else if (target === 'contact') {
             grid.classList.add('hidden');
             aboutSection.classList.add('hidden');
             contactSection.classList.remove('hidden');
-        } else {
+        } 
+        else {
             renderGallery(target);
         }
     });
